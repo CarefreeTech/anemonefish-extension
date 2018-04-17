@@ -1,0 +1,33 @@
+{
+    "manifest_version": 2,
+    "name": "Test",
+    "version": "1.0",
+    "description": "Test.",
+    "author": "anemonefish@carefree.site",
+    "homepage_url": "https://github.com/CarefreeTech/anemonefish-extension",
+    "icons": {
+        "48": "resources/img/icon.png"
+    },
+
+    "permissions": [
+        "tabs",
+        "webNavigation",
+        "webRequest",
+        "webRequestBlocking",
+        "<all_urls>"
+    ],
+
+    "devtools_page": "devtools/devtools.html",
+
+    "background": {
+        "scripts": ["resources/js/jquery.min.js", "background_scripts/background.js"]
+    },
+
+    "content_scripts": [
+        {
+        "all_frames": true,
+        "matches": ["<all_urls>"],
+        "js": ["resources/js/jquery.min.js", "content_scripts/content.js"]
+        }
+    ]
+}
