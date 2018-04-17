@@ -1,7 +1,7 @@
 'use strict';
 
 browser.devtools.panels.create(
-    'Anemonefish',
+    '小丑鱼',
     '/resources/img/icon.png',
     'panel/panel.html'
 ).then((panel) => {

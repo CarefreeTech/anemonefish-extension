@@ -32,7 +32,7 @@ $(function($) {
     ];
 
     let data = {
-        from: window.location.href,
+        target: window.location.href,
         urls: []
     };
 
