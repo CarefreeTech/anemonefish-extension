@@ -20,7 +20,7 @@ $(function($) {
         {name: 'button', attrs: ['formaction']},
         {name: 'command', attrs: ['icon']},
         {name: 'menuitem', attrs: ['icon']},
-        {name: 'form', attrs: ['action']},
+        {name: 'form', attrs: ['action']}, // TODO: 处理事件，以及表单参数
         {name: 'frame', attrs: ['src', 'longdesc']},
         {name: 'iframe', attrs: ['src', 'longdesc']},
         {name: 'head', attrs: ['profile']},
@@ -32,7 +32,7 @@ $(function($) {
     ];
 
     let data = {
-        target: window.location.href,
+        from: window.location.href,
         urls: []
     };
 
@@ -41,28 +41,40 @@ $(function($) {
             $(tag.attrs).each((_, attr) => {
                 let url = $(e).attr(attr);
 
-                if (url && url != '#' && url.indexOf('javascript:') != 0) {
-                    let a = $('<a>', {href: url});
+                if (url) {
+                    if (url.indexOf('mailto:') == 0) {
+                        // TODO: 处理mailto
+                    } else if (url != '#' && url.indexOf('javascript:') != 0) {
+                        let exist = false;
+                        let a = $('<a>', {href: url});
 
-                    url = a.prop('protocol')+'//'
-                        +(a.prop('username')?(a.prop('username')+':'+a.prop('password')+'@'):'')
-                        +a.prop('hostname')
-                        +(a.prop('port')?(':'+a.prop('port')):'')
-                        +a.prop('pathname')
-                        +a.prop('search')
-                        +a.prop('hash');
+                        url = a.prop('protocol')+'//'
+                            +(a.prop('username')?(a.prop('username')+':'+a.prop('password')+'@'):'')
+                            +a.prop('host')
+                            // +a.prop('hostname')
+                            // +(a.prop('port')?(':'+a.prop('port')):'')
+                            +a.prop('pathname')
+                            +a.prop('search')
+                            +a.prop('hash');
 
-                    let exist = false;
-
-                    for (let u of data.urls) {
-                        if (u === url) {
-                            exist = true;
-                            break;
+                        for (let u of data.urls) {
+                            if (u.url === url) {
+                                exist = true;
+                                break;
+                            }
                         }
-                    }
 
-                    if (!exist) {
-                        data.urls.push(url);
+                        if (!exist) {
+                            data.urls.push({
+                                url: url,
+                                hostname: a.prop('hostname'),
+                                port: a.prop('port')||(a.prop('protocol')==='https:'?'443':'80'),
+                                protocol: a.prop('protocol').split(':')[0],
+                                path: a.prop('pathname'),
+                                search: a.prop('search'),
+                                hash: a.prop('hash')
+                            });
+                        }
                     }
                 }
             });

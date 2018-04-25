@@ -1,12 +1,12 @@
 {
     "manifest_version": 2,
-    "name": "Test",
+    "name": "AnemoneFish",
     "version": "1.0",
     "description": "Test.",
     "author": "anemonefish@carefree.site",
     "homepage_url": "https://github.com/CarefreeTech/anemonefish-extension",
     "icons": {
-        "48": "resources/img/icon.png"
+        "48": "resources/icon/icon.png"
     },
 
     "permissions": [
