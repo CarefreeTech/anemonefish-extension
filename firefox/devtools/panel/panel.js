@@ -11,7 +11,7 @@ let context = {
 
 // 置换hint样式
 function exchangeHint() {
-    context.hinting?$('#hint').addClass('toolbar-checkbox-checked'):$('#hint').removeClass('toolbar-checkbox-checked');
+    context.hinting?$('#hint').addClass('tc-checked'):$('#hint').removeClass('tc-checked');
 }
 
 // port消息监听器
@@ -32,7 +32,7 @@ port.onMessage.addListener((message) => {
 
 // 提示点击监听器
 $('#hint').click(() => {
-    context.hinting = !$('#hint').hasClass('toolbar-checkbox-checked');
+    context.hinting = !$('#hint').hasClass('tc-checked');
     exchangeHint();
 
     // context变更
@@ -46,17 +46,22 @@ $('#hint').click(() => {
 $('table > tbody tr').each((i, e) => {
     $(e).click(() => {
         // 清除之前选中项样式
-        $('table > tbody tr').removeClass('table-tr-active');
+        $('table > tbody tr').removeClass('tr-selected');
         // 选中
-        $(e).addClass('table-tr-active');
+        $(e).addClass('tr-selected');
 
         // 展开detail
         $('.main').removeClass('collapse');
+        // 显示详情数据
         $('.detail-content').text(i);
     });
 });
 
 // 收缩详情
 $('#detail-collapse').click(() => {
+    // 清除之前选中项样式
+    $('table > tbody tr').removeClass('tr-selected');
+
+    // 收缩detail
     $('.main').addClass('collapse');
 });

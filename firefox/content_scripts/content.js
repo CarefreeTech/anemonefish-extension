@@ -53,14 +53,6 @@ $(function ($) {
     
     // 被解析可见元素集
     let elements = [];
-    
-    // 初始化context
-    browser.runtime.sendMessage({
-        action: 'context_init',
-        data: ''
-    }).then((response) => {
-        $.extend(true, context, response);
-    });
 
     // 提示，更新css
     function hint(hinting) {
@@ -68,18 +60,6 @@ $(function ($) {
             $(e.node).css('border', hinting?'2px solid red':e.original.border);
         }
     }
-
-    // 消息监听器
-    browser.runtime.onMessage.addListener((message) => {
-        switch (message.action) {
-            case 'context_change':
-                $.extend(true, context, message.data);
-
-                // 变更hint
-                hint(context.hinting);
-                break;
-        }
-    });
 
     // 重构并缓存数据
     function cacheData(url) {
@@ -172,17 +152,38 @@ $(function ($) {
             getURL($(e));
         });
     }
-
-    // 解析页面
-    getURL($('html'));
-
-    // 回传解析数据集
+    
+    // 初始化context
     browser.runtime.sendMessage({
-        action: 'parsing_complete',
-        data: data
-    });
+        action: 'context_init',
+        data: ''
+    }).then((response) => {
+        $.extend(true, context, response);
 
-    if (context.hinting) {
-        hint(context.hinting);
-    }
+        // 消息监听器
+        browser.runtime.onMessage.addListener((message) => {
+            switch (message.action) {
+                case 'context_change':
+                    $.extend(true, context, message.data);
+    
+                    // 变更hint
+                    hint(context.hinting);
+                    break;
+            }
+        });
+
+        // 解析页面
+        getURL($('html'));
+
+        // 回传解析数据集
+        browser.runtime.sendMessage({
+            action: 'parsing_complete',
+            data: data
+        });
+
+        // 初始化hint
+        if (context.hinting) {
+            hint(context.hinting);
+        }
+    });
 })();

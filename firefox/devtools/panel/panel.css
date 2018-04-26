@@ -43,7 +43,7 @@ html, body {
     background-color: #e3e4e7;
 }
 
-.toolbar-button.toolbar-button-active {
+.toolbar-button.tb-active {
     color: #0060df;
 }
 
@@ -59,7 +59,7 @@ html, body {
     background-color: #e3e4e7;
 }
 
-.toolbar-checkbox.toolbar-checkbox-active {
+.toolbar-checkbox.tc-checked {
     color: #ffffff;
     background-color: #0074e8;
 }
@@ -132,10 +132,10 @@ table > tbody tr:hover {
     background-color: #f0f9fe;
 }
 
-table > tbody tr.table-tr-active {
+table > tbody tr.tr-selected {
     background-color: #0074e8;
 }
 
-table > tbody tr.table-tr-active > td {
+table > tbody tr.tr-selected > td {
     color: #99c7f5;
 }
