@@ -1,17 +1,64 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset='utf-8'>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="/resources/css/font-awesome.min.css">
+        <link rel="stylesheet" href="panel.css">
     </head>
     <body>
-        <div id='sidebar'>
-            <ul id='sidebar_ul'>
-            </ul>
+        <div class="toolbar">
+            <a class="toolbar-checkbox" id="hint">提示</a>
+            <a class="toolbar-checkbox" id="intercept">拦截</a>
         </div>
-        <div id='main'>
-            <textarea></textarea>
+        <div class="main collapse">
+            <div class="sidebar">
+                <div class="toolbar">
+                    <a class="toolbar-checkbox" id="hint">提示</a>
+                    <a class="toolbar-checkbox" id="intercept">拦截</a>
+                </div>
+                <div class="sidebar-content">
+
+                </div>
+                <div class="banner">
+                    100 个域名
+                </div>
+            </div>
+            <div class="list">
+                <table border="0">
+                    <thead>
+                        <tr>
+                            <th>aa</th>
+                            <th>aa</th>
+                            <th>aa</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>adfasdf</td>
+                            <td>adfasdf</td>
+                            <td>adfasdf</td>
+                        </tr>
+                        <tr>
+                            <td>adfasdf</td>
+                            <td>adfasdf</td>
+                            <td>adfasdf</td>
+                        </tr>
+                        <tr>
+                            <td>adfasdf</td>
+                            <td>adfasdf</td>
+                            <td>adfasdf</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="detail">
+                <div class="toolbar">
+                    <a class="toolbar-button" id="detail-collapse"><i class="fa fa-caret-square-o-right fa-fw"></i></a>
+                </div>
+                <div class="detail-content"></div>
+            </div>
         </div>
         <script src="/resources/js/jquery.min.js"></script>
-        <script src='panel.js'></script>
+        <script src="panel.js"></script>
     </body>
 </html>

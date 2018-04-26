@@ -1,0 +1,141 @@
+* {
+    color: #4a4a4f;
+    font-size: 12px;
+    cursor: default;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+.toolbar, .banner {
+    padding: 0 3px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    background-color: #f9f9fa;
+}
+
+.toolbar {
+    border-bottom: 1px solid #e0e0e1;
+}
+
+.banner {
+    border-top: 1px solid #e0e0e1;
+}
+
+.toolbar-button {
+    width: 26px;
+    height: 22px;
+    line-height: 22px;
+    border-radius: 1.5px;
+    text-align: center;
+}
+
+.toolbar-button > i {
+    line-height: 22px;
+    font-size: 14px;
+}
+
+.toolbar-button:hover {
+    background-color: #e3e4e7;
+}
+
+.toolbar-button.toolbar-button-active {
+    color: #0060df;
+}
+
+.toolbar-checkbox {
+    margin: 0 1px;
+    padding: 1px 6px;
+    border-radius: 1.5px;
+    background-color: #ededf0;
+    text-decoration-line: none;
+}
+
+.toolbar-checkbox:hover {
+    background-color: #e3e4e7;
+}
+
+.toolbar-checkbox.toolbar-checkbox-active {
+    color: #ffffff;
+    background-color: #0074e8;
+}
+
+.main {
+    height: calc(100% - 25px);
+    background-color: #ffffff;
+}
+
+.main > div {
+    float: left;
+    display: block;
+    height: 100%;
+}
+
+.sidebar {
+    width: 250px;
+    border-right: 1px solid #e0e0e1;
+}
+
+.sidebar > .sidebar-content {
+    height: calc(100% - 50px);
+}
+
+.list {
+    width: calc(100% - 802px);
+}
+
+.main.collapse > .list{
+    width: calc(100% - 251px);
+}
+
+.detail {
+    display: block;
+    width: 550px;
+    border-left: 1px solid #e0e0e1;
+}
+
+.main.collapse > .detail{
+    display: none;
+}
+
+table {
+    width: 100%;
+    border-collapse:collapse;    
+    background-color: #f9f9fa;
+}
+
+table > thead {
+    border-bottom: 1px solid #e0e0e1;
+}
+
+table > thead th {
+    font-weight: 100;
+}
+
+table > tbody {
+    background-color: #ffffff;
+}
+
+table tr {
+    height: 24px;
+}
+
+table > tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+table > tbody tr:hover {
+    background-color: #f0f9fe;
+}
+
+table > tbody tr.table-tr-active {
+    background-color: #0074e8;
+}
+
+table > tbody tr.table-tr-active > td {
+    color: #99c7f5;
+}

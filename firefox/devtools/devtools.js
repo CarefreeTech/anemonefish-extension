@@ -1,16 +1,16 @@
 'use strict';
 
 browser.devtools.panels.create(
-    '小丑鱼',
+    '请求资源',
     '/resources/icon/icon.png',
     'panel/panel.html'
 ).then((panel) => {
     panel.onShown.addListener(() => {
-        console.log('panel shown');
+        // console.log('panel shown');
     });
     
     panel.onHidden.addListener(() => {
-        console.log('panel hidden');
+        // console.log('panel hidden');
     });
 });
 
