@@ -6,7 +6,8 @@
     "author": "anemonefish@carefree.site",
     "homepage_url": "https://github.com/CarefreeTech/anemonefish-extension/",
     "icons": {
-        "48": "resources/icon/icon.png"
+        "48": "resources/icon/icon.png",
+        "96": "resources/icon/icon@2x.png"
     },
 
     "permissions": [
