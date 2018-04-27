@@ -3,6 +3,7 @@
     <head>
         <meta charset="utf-8">
         <link rel="stylesheet" href="/resources/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/resources/css/jquery.treeview.css">
         <link rel="stylesheet" href="panel.css">
     </head>
     <body>
@@ -10,13 +11,39 @@
             <a class="toolbar-checkbox" id="hint">提示</a>
             <a class="toolbar-checkbox" id="intercept">拦截</a>
         </div>
-        <div class="main collapse">
+        <div class="main">
             <div class="sidebar">
                 <div class="toolbar">
-                    <a class="toolbar-checkbox" id="loadall">加载所有</a>
+                    <a class="toolbar-checkbox" id="open-all">展开全部</a>
+                    <a class="toolbar-checkbox" id="load-all">加载所有</a>
                 </div>
                 <div class="sidebar-content">
-
+                    <ul class="sidebar-tree">
+                        <!-- <li><a><i class="fa fa-user-secret"></i>baidu.com</a>
+                            <ul>
+                                <li><a><i class="fa fa-internet-explorer"></i>abc.baidu.com:80</a>
+                                <li><a><i class="fa fa-internet-explorer"></i>static.baidu.com:80</a>
+                                </li>
+                                <li><a><i class="fa fa-internet-explorer"></i>www.baidu.com:80</a>
+                                    <ul>
+                                        <li><a><i class="fa fa-folder-o"></i>/</a>
+                                            <ul>
+                                                <li><a><i class="fa fa-folder-o"></i>res</a>
+                                                    <ul>
+                                                        <li><a><i class="fa fa-file-code-o"></i>a.css</a></li>
+                                                        <li><a><i class="fa fa-file-code-o"></i>b.js</a></li>
+                                                        <li><a><i class="fa fa-file-image-o"></i>c.jpg</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li><a><i class="fa fa-file-text-o"></i>index.fish</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a><i class="fa fa-user-secret"></i>baobao.com</a></li> -->
+                    </ul>
                 </div>
                 <div class="banner">
                     100 个域名
@@ -26,16 +53,16 @@
                 <table border="0">
                     <thead>
                         <tr>
-                            <th>aa</th>
-                            <th>aa</th>
-                            <th>aa</th>
+                            <th width="20%">aa</th>
+                            <th width="50%">aa</th>
+                            <th width="30%">aa</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
+                            <td>中文测试一下很长的字中文测试一下很长的字中文测试一下很长的字</td>
                             <td>adfasdf</td>
-                            <td>adfasdf</td>
-                            <td>adfasdf</td>
+                            <td>adfasdfssssssssssssssssssssssssssssssssssssssssssss</td>
                         </tr>
                         <tr>
                             <td>adfasdf</td>
@@ -50,7 +77,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="detail">
+            <div class="detail dt-collapsed">
                 <div class="toolbar">
                     <a class="toolbar-button" id="detail-collapse"><i class="fa fa-caret-square-o-right fa-fw"></i></a>
                 </div>
@@ -58,6 +85,16 @@
             </div>
         </div>
         <script src="/resources/js/jquery.min.js"></script>
+        <!-- <script src="/resources/js/jquery.treeview.js"></script> -->
         <script src="panel.js"></script>
+        <!-- <script>
+            $('#target-tree').treeview({
+                collapsed: true,
+                persist: "location",
+                toggle: function() {
+                    window.console && console.log("%o was toggled", this);
+                }
+            });
+        </script> -->
     </body>
 </html>

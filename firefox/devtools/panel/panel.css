@@ -8,22 +8,19 @@ html, body {
     margin: 0;
     padding: 0;
     height: 100%;
+    overflow: hidden;
 }
 
 .toolbar, .banner {
+    display: flex;
     padding: 0 3px;
     height: 24px;
-    display: flex;
     align-items: center;
     background-color: #f9f9fa;
 }
 
 .toolbar {
     border-bottom: 1px solid #e0e0e1;
-}
-
-.banner {
-    border-top: 1px solid #e0e0e1;
 }
 
 .toolbar-button {
@@ -43,7 +40,7 @@ html, body {
     background-color: #e3e4e7;
 }
 
-.toolbar-button.tb-active {
+.toolbar-button.tb-active, .toolbar-button.tb-active > i {
     color: #0060df;
 }
 
@@ -51,60 +48,123 @@ html, body {
     margin: 0 1px;
     padding: 1px 6px;
     border-radius: 1.5px;
-    background-color: #ededf0;
     text-decoration-line: none;
+    background-color: hsl(240, 9%, 94%);
 }
 
 .toolbar-checkbox:hover {
     background-color: #e3e4e7;
 }
 
-.toolbar-checkbox.tc-checked {
+.toolbar-checkbox.tc-checked, .toolbar-checkbox.tc-checked > i {
     color: #ffffff;
     background-color: #0074e8;
 }
 
+.banner {
+    position: relative;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-top: 1px solid #e0e0e1;
+}
+
 .main {
+    display: flex;
     height: calc(100% - 25px);
+    justify-content: space-between;
+    align-items: center;
     background-color: #ffffff;
 }
 
 .main > div {
-    float: left;
-    display: block;
     height: 100%;
 }
 
 .sidebar {
-    width: 250px;
     border-right: 1px solid #e0e0e1;
 }
 
-.sidebar > .sidebar-content {
+.sidebar-content {
+    width: 250px;
     height: calc(100% - 50px);
+    overflow: auto;
+}
+
+.sidebar-tree {
+    min-width: 250px;
+    width: auto;
+}
+
+.sidebar-tree, .sidebar-tree ul {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+.sidebar-tree li {
+	padding-left: 20px;
+    min-height: 24px;
+}
+
+.sidebar-tree li > a {
+    display: block;
+    height: 24px;
+    line-height: 24px;
+    word-break: break-all;
+    overflow: visible;
+}
+
+.sidebar-tree li > a:hover, .sidebar-tree li > a:hover > i {
+    color: #0074e8;
+}
+
+.sidebar-tree li > a.a-selected, .sidebar-tree li > a.a-selected > i {
+    color: #0074e8;
+    font-weight: bold;
+}
+
+.sidebar-tree li > a > i {
+    width: 20px;
+    text-align: center;
+}
+
+.sidebar-tree li > ul {
+    display: none;
+}
+
+.sidebar-tree li.li-opened > ul {
+    display: block;
+}
+
+.sidebar-tree .hitarea {
+    float: left;
+    margin-left: -20px;
+    width: 20px;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    font-family: FontAwesome;
+    font-size: 16px;
+}
+
+.sidebar-tree .hitarea::before {
+    content: "\f0da";
+}
+
+.sidebar-tree li.li-opened > .hitarea::before {
+    content: "\f0d7";
 }
 
 .list {
-    width: calc(100% - 802px);
-}
-
-.main.collapse > .list{
-    width: calc(100% - 251px);
-}
-
-.detail {
-    display: block;
-    width: 550px;
-    border-left: 1px solid #e0e0e1;
-}
-
-.main.collapse > .detail{
-    display: none;
+    flex: 1;
+    overflow: auto;
 }
 
 table {
     width: 100%;
-    border-collapse:collapse;    
+    table-layout: fixed;
+    border-collapse: collapse;    
     background-color: #f9f9fa;
 }
 
@@ -112,16 +172,20 @@ table > thead {
     border-bottom: 1px solid #e0e0e1;
 }
 
-table > thead th {
-    font-weight: 100;
-}
-
 table > tbody {
     background-color: #ffffff;
 }
 
+table > thead th {
+    font-weight: normal;
+}
+
 table tr {
     height: 24px;
+}
+
+table > thead > tr {
+    height: 25px;
 }
 
 table > tbody tr:nth-child(even) {
@@ -136,6 +200,31 @@ table > tbody tr.tr-selected {
     background-color: #0074e8;
 }
 
+table > thead th:not(:last-child) {
+    border-right: 1px solid #e0e0e1;
+}
+
+table td {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
 table > tbody tr.tr-selected > td {
     color: #99c7f5;
+}
+
+.detail {
+    flex: 1;
+    border-left: 1px solid #e0e0e1;
+    background-color: #f9f9fa;
+}
+
+.detail.dt-collapsed{
+    display: none;
+}
+
+.detail-content {
+    height: calc(100% - 25px);
+    overflow: auto;
 }

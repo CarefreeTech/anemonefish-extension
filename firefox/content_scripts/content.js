@@ -1,4 +1,4 @@
-$(function ($) {
+;$(function ($) {
     'use strict';
 
     // 可见标签集
@@ -137,15 +137,17 @@ $(function ($) {
 
     // 递归遍历页面各节点
     function getURL(element) {
-        element.contents().each((_, e) => {
+        element.contents().each(function () {
+            let e = this;
+
             switch (e.nodeType) {
-                case 1: // element
-                    parseElement(e);
-                    break;
-                case 3: // text
-                case 8: // comment
-                    parseText(e.nodeValue);
-                    break;
+            case 1: // element
+                parseElement(e);
+                break;
+            case 3: // text
+            case 8: // comment
+                parseText(e.nodeValue);
+                break;
             }
 
             // 递归孩子节点
@@ -163,12 +165,12 @@ $(function ($) {
         // 消息监听器
         browser.runtime.onMessage.addListener((message) => {
             switch (message.action) {
-                case 'context_change':
-                    $.extend(true, context, message.data);
-    
-                    // 变更hint
-                    hint(context.hinting);
-                    break;
+            case 'context_change':
+                $.extend(true, context, message.data);
+
+                // 变更hint
+                hint(context.hinting);
+                break;
             }
         });
 
@@ -186,4 +188,4 @@ $(function ($) {
             hint(context.hinting);
         }
     });
-})();
+})(jQuery);

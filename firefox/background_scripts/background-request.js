@@ -24,30 +24,30 @@ browser.webRequest.onBeforeRequest.addListener((details) => {
     }
 
     switch (details.type) {
-        case 'main_frame':
-        case 'sub_frame':
-        case 'websocket':
-        case 'xmlhttprequest':
-            // 响应体过滤器
-            let filter = browser.webRequest.filterResponseData(details.requestId);
-            
-            filter.ondata = (event) => {
-                let req = tempRequests[details.requestId];
+    case 'main_frame':
+    case 'sub_frame':
+    case 'websocket':
+    case 'xmlhttprequest':
+        // 响应体过滤器
+        let filter = browser.webRequest.filterResponseData(details.requestId);
+        
+        filter.ondata = (event) => {
+            let req = tempRequests[details.requestId];
 
-                if (req) {
-                    req.response.body += (new TextDecoder('utf-8').decode(event.data, {stream: true}) || '');
-                }
+            if (req) {
+                req.response.body += (new TextDecoder('utf-8').decode(event.data, {stream: true}) || '');
+            }
 
-                filter.write(event.data);
-            };
+            filter.write(event.data);
+        };
 
-            filter.onstop = event => {
-                filter.disconnect();
-            };
-            break;
-        case 'other':
-            // console.log('other');
-            break;
+        filter.onstop = event => {
+            filter.disconnect();
+        };
+        break;
+    case 'other':
+        // console.log('other');
+        break;
     }
 }, {urls: ['<all_urls>']}, ['blocking', 'requestBody']);
 
@@ -113,14 +113,21 @@ browser.webRequest.onCompleted.addListener((details) => {
 
         for (let i = 1; i < paths.length; i++) {
             if (i === paths.length-1) {
-                tempTar = tempTar.children[paths[i]] = {url: req.url, category: 'file', type: req.type};
+                tempTar = tempTar.children[paths[i]] = {
+                    category: 'file',
+                    filetype: req.type,
+                    url: req.url
+                };
             } else {
-                tempTar = tempTar.children[paths[i]] = {children: {}, category: 'dir'};
+                tempTar = tempTar.children[paths[i]] = {
+                    category: 'dir',
+                    children: {}
+                };
             }
         }
 
         $.extend(true, targets, tar);
-        // console.log(targets);
+        syncPanels('request_resource', 'target_sync', tar, true);
         
         // post to devtools
         requests[req.url] = $.extend(true, {}, reqTamplate, req);

@@ -28,8 +28,10 @@ let ports = {
 let targets = {};
 // 请求集
 let requests = {};
+// 请求详情集
+let requestDetails = {};
 // 路径集
-let paths = {};
+// let paths = {};
 // 参数集
 let params = {};
 
@@ -51,6 +53,8 @@ let reqTamplate = {
     from: '',
     element: '',
     request_from_webpage: false,
+    hits: 0,
+    time: 0,
     request: {
         method: '',
         headers: {}, // TODO: 是否单独存储content-type
@@ -68,6 +72,7 @@ let reqTamplate = {
     }
 };
 
+// 输出banner
 console.log(banner);
 
 // 获取二级域名
@@ -101,34 +106,42 @@ function getDomain(hostname) {
 }
 
 // 获取文件类型
-function getFileType(file) {
+function getFileType(req) {
     // TODO: 获取文件类型
-    return ""
+    if (req.type) {
+        switch (req.type) {
+
+        }
+    } else {
+
+    }
+
+    return "unknown";
 }
 
 // 消息监听器，一般来自content
 browser.runtime.onMessage.addListener((message) => {
     switch (message.action) {
-        case 'parsing_complete':
-            // console.log(message.data);
+    case 'parsing_complete':
+        // console.log(message.data);
 
-            /*for (let i = 0; i < message.data.urls.length-1; i++) {
-                let u = message.data.urls[i];
-                console.log(u);
+        /*for (let i = 0; i < message.data.urls.length-1; i++) {
+            let u = message.data.urls[i];
+            console.log(u);
+            
+            if (!requests[u.url]) {
+                u.domain = getDomain(u.hostname);
+                u.type = ''; // TODO: getType(url)
+                u.from = message.data.from;
                 
-                if (!requests[u.url]) {
-                    u.domain = getDomain(u.hostname);
-                    u.type = ''; // TODO: getType(url)
-                    u.from = message.data.from;
-                    
-                    // post to devtools
-                    // console.log(u);
-                    requests[u.url] = $.extend({}, reqTamplate, u);
-                }
-            }*/
-            break;
-        case 'context_init':
-            return Promise.resolve(context);
+                // post to devtools
+                // console.log(u);
+                requests[u.url] = $.extend({}, reqTamplate, u);
+            }
+        }*/
+        break;
+    case 'context_init':
+        return Promise.resolve(context);
     }
 });
 
@@ -164,23 +177,32 @@ function syncTabs() {
 }
 
 // 同步panels
-function syncPanels(name, action, data) {
-    // 当前窗口活动tab
-    browser.tabs.query({
-        currentWindow: true,
-        active: true
-    }).then((tabs) => {
-        let tab = tabs[0].id;
-
+function syncPanels(name, action, data, self) {
+    if (self) {
         for (let p of ports[name]) {
-            if (p.tab != tab) {
-                p.port.postMessage({
-                    action: action,
-                    data: data
-                });
-            }
+            p.port.postMessage({
+                action: action,
+                data: data
+            });
         }
-    });
+    } else {
+        // 当前窗口活动tab
+        browser.tabs.query({
+            currentWindow: true,
+            active: true
+        }).then((tabs) => {
+            let tab = tabs[0].id;
+    
+            for (let p of ports[name]) {
+                if (p.tab != tab) {
+                    p.port.postMessage({
+                        action: action,
+                        data: data
+                    });
+                }
+            }
+        });
+    }
 }
 
 // port连接监听器，一般来自panel
@@ -190,26 +212,31 @@ browser.runtime.onConnect.addListener((port) => {
     }
     
     switch (port.name) {
-        case 'request_resource':
-            port.postMessage({
-                action: 'context_init',
-                data: context
-            });
-            break;
+    case 'request_resource':
+        port.postMessage({
+            action: 'context_init',
+            data: context
+        });
+        break;
     }
 
     // port消息监听器
     port.onMessage.addListener((message) => {
         switch (message.action) {
-            case 'port_sign':
-                cachePort(port, message.data);
-                break;
-            case 'context_change':
-                $.extend(true, context, message.data);
+        case 'port_sign':
+            cachePort(port, message.data);
 
-                syncTabs();
-                syncPanels(port.name, 'context_sync', context);
-                break;
+            port.postMessage({
+                action: 'target_init',
+                data: targets
+            });
+            break;
+        case 'context_change':
+            $.extend(true, context, message.data);
+
+            syncTabs();
+            syncPanels(port.name, 'context_sync', context, false);
+            break;
         }
     });
 });
