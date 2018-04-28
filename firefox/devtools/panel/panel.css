@@ -60,6 +60,12 @@ body {
     background-color: #0074e8;
 }
 
+.toolbar-button,
+.toolbar-checkbox {
+    white-space: nowrap;
+    overflow: hidden;
+}
+
 .toolbar-button > i,
 .toolbar-checkbox > i {
     font-size: 14px;
@@ -71,6 +77,12 @@ body {
     right: 0;
     bottom: 0;
     border-top: 1px solid #e0e0e1;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.banner > span {
+    padding: 0 4px;
 }
 
 .main {
@@ -171,31 +183,52 @@ body {
 }
 
 .list {
-    flex: 7;
+    flex: 10;
+    overflow: hidden;
+}
+
+.list-content {
+    width: 100%;
+    height: 100%;
     overflow: hidden;
 }
 
 .list table {
+    display: block;
     width: 100%;
     height: 100%;
     table-layout: fixed;
     border-collapse: collapse;    
     background-color: #f9f9fa;
-    overflow: auto;
 }
 
 .list table > thead {
+    display: table;
+    width: calc(100% - 16px);
     border-bottom: 1px solid #e0e0e1;
 }
 
 .list table > tbody {
-    /* display: block; */
+    display: block;
     height: calc(100% - 25px);
     background-color: #ffffff;
-    /* overflow: scroll; */
+    overflow-y: scroll;
 }
 
 .list table tr {
+    display: table;
+    width: 100%;
+    height: 24px;
+    table-layout: fixed;    
+}
+
+.list table td {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.list table > thead > tr {
     height: 24px;
 }
 
@@ -203,8 +236,8 @@ body {
     font-weight: normal;
 }
 
-.list table > thead > tr {
-    height: 25px;
+.list table > thead th:not(:last-child) {
+    border-right: 1px solid #e0e0e1;
 }
 
 .list table > tbody tr:nth-child(even) {
@@ -219,22 +252,12 @@ body {
     background-color: #0074e8;
 }
 
-.list table > thead th:not(:last-child) {
-    border-right: 1px solid #e0e0e1;
-}
-
-.list table td {
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-}
-
 .list table > tbody tr.tr-selected > td {
     color: #99c7f5;
 }
 
 .detail {
-    flex: 7;
+    flex: 6;
     border-left: 1px solid #e0e0e1;
     background-color: #f9f9fa;
     overflow: hidden;
@@ -245,10 +268,7 @@ body {
 }
 
 .detail-content {
+    width: 100%;
     height: calc(100% - 25px);
     overflow: auto;
-}
-
-#open-all > i {
-    font-size: 14px;
 }

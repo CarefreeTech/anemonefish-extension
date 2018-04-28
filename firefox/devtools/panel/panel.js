@@ -7,7 +7,10 @@
     let port = browser.runtime.connect({name: 'request_resource'});
     // 上下文环境
     let context = {
-        hinting: false
+        hinting: false, // 提示标识符
+        intercept: false,
+        deepparse: true,
+        autotest: false
     }
 
     // 置换hint样式
@@ -113,6 +116,9 @@
                 parse(path, refresh(ul, hostname, html, true));
             });
         });
+
+        $('.sidebar > .banner > #domain').text($('.sidebar-tree > li').length);
+        $('.sidebar > .banner > #hostname').text($('.sidebar-tree > li > ul > li').length);
     }
 
     // port消息监听器
@@ -166,6 +172,7 @@
         // 清除之前选中项样式
         $('table > tbody tr.tr-selected').removeClass('tr-selected');
         // 选中
+        $('.list').css('flex', '4');
         $(this).addClass('tr-selected');
 
         // 展开detail
@@ -181,6 +188,7 @@
         $('table > tbody tr.tr-selected').removeClass('tr-selected');
 
         // 收缩detail
+        $('.list').css('flex', '10');
         $('.detail').addClass('dt-collapsed');
     });
 })(jQuery);

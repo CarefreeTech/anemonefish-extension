@@ -16,7 +16,10 @@ const topDomains = ['aaa', 'aarp', 'abarth', 'abb', 'abbott', 'abbvie', 'abc', '
 
 // 上下文环境
 let context = {
-    hinting: false // 提示标识符
+    hinting: false, // 提示标识符
+    intercept: false, // 拦截标识符
+    deepparse: true, // 深度解析标识符
+    autotest: false // 自动测试标识符
 }
 
 // port连接集

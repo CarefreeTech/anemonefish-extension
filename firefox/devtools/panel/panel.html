@@ -10,6 +10,8 @@
         <div class="toolbar">
             <a class="toolbar-checkbox" id="hint">提示</a>
             <a class="toolbar-checkbox" id="intercept">拦截</a>
+            <a class="toolbar-checkbox tc-checked" id="deep">深度解析</a>
+            <a class="toolbar-checkbox" id="auto">自动测试</a>
         </div>
         <div class="main">
             <div class="sidebar">
@@ -45,111 +47,103 @@
                     </ul>
                 </div>
                 <div class="banner">
-                    100 个域名
+                    <span id="domain">0</span>个域名，共<span id="hostname">0</span>个主机
                 </div>
             </div>
             <div class="list">
-                <table border="0">
-                    <thead>
-                        <tr>
-                            <th width="20%">aa</th>
-                            <th width="50%">aa</th>
-                            <th width="30%">aa</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>中文测试一下很长的字中文测试一下很长的字中文测试一下很长的字</td>
-                            <td>adfasdf</td>
-                            <td>adfasdfssssssssssssssssssssssssssssssssssssssssssss</td>
-                        </tr>
-                        <tr>
-                            <td>adfasdf</td>
-                            <td>adfasdf</td>
-                            <td>adfasdf</td>
-                        </tr>
-                        <tr>
-                            <td>adfasdf</td>
-                            <td>adfasdf</td>
-                            <td>adfasdf</td>
-                        </tr>
-                        <tr>
-                            <td>adfasdf</td>
-                            <td>adfasdf</td>
-                            <td>adfasdf</td>
-                        </tr>
-                        <tr>
-                            <td>adfasdf</td>
-                            <td>adfasdf</td>
-                            <td>adfasdf</td>
-                        </tr>
-                        <tr>
-                            <td>adfasdf</td>
-                            <td>adfasdf</td>
-                            <td>adfasdf</td>
-                        </tr>
-                        <tr>
-                            <td>adfasdf</td>
-                            <td>adfasdf</td>
-                            <td>adfasdf</td>
-                        </tr>
-                        <tr>
-                            <td>adfasdf</td>
-                            <td>adfasdf</td>
-                            <td>adfasdf</td>
-                        </tr>
-                        <tr>
-                            <td>adfasdf</td>
-                            <td>adfasdf</td>
-                            <td>adfasdf</td>
-                        </tr>
-                        <tr>
-                            <td>adfasdf</td>
-                            <td>adfasdf</td>
-                            <td>adfasdf</td>
-                        </tr>
-                        <tr>
-                            <td>adfasdf</td>
-                            <td>adfasdf</td>
-                            <td>adfasdf</td>
-                        </tr>
-                        <tr>
-                            <td>adfasdf</td>
-                            <td>adfasdf</td>
-                            <td>adfasdf</td>
-                        </tr>
-                        <tr>
-                            <td>adfasdf</td>
-                            <td>adfasdf</td>
-                            <td>adfasdf</td>
-                        </tr>
-                        <tr>
-                            <td>adfasdf</td>
-                            <td>adfasdf</td>
-                            <td>adfasdf</td>
-                        </tr>
-                        <tr>
-                            <td>adfasdf</td>
-                            <td>adfasdf</td>
-                            <td>adfasdf</td>
-                        </tr>
-                        <tr>
-                            <td>adfasdf</td>
-                            <td>adfasdf</td>
-                            <td>adfasdf</td>
-                        </tr>
-                        <tr>
-                            <td>adfasdf</td>
-                            <td>adfasdf</td>
-                            <td>adfasdf</td>
-                        </tr>
-                        <tr>
-                            <td>adfasdf</td>
-                            <td>adfasdf</td>
-                            <td>adfasdf</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="list-content">
+                    <table border="0">
+                        <thead>
+                            <tr>
+                                <th width="20%">aa</th>
+                                <th width="50%">aa</th>
+                                <th width="30%">aa</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td width="20%">中文测试一下很长的字中文测试一下很长的字中文测试一下很长的字</td>
+                                <td width="50%">adfasdf</td>
+                                <td width="30%">adfasdfssssssssssssssssssssssssssssssssssssssssssss</td>
+                            </tr>
+                            <tr>
+                                <td width="20%">adfasdf</td>
+                                <td width="50%">adfasdf</td>
+                                <td width="30%">adfasdf</td>
+                            </tr>
+                            <tr>
+                                <td width="20%">adfasdf</td>
+                                <td width="50%">adfasdf</td>
+                                <td width="30%">adfasdf</td>
+                            </tr>
+                            <tr>
+                                <td width="20%">adfasdf</td>
+                                <td width="50%">adfasdf</td>
+                                <td width="30%">adfasdf</td>
+                            </tr>
+                            <tr>
+                                <td width="20%">adfasdf</td>
+                                <td width="50%">adfasdf</td>
+                                <td width="30%">adfasdf</td>
+                            </tr>
+                            <tr>
+                                <td width="20%">adfasdf</td>
+                                <td width="50%">adfasdf</td>
+                                <td width="30%">adfasdf</td>
+                            </tr>
+                            <tr>
+                                <td width="20%">adfasdf</td>
+                                <td width="50%">adfasdf</td>
+                                <td width="30%">adfasdf</td>
+                            </tr>
+                            <tr>
+                                <td width="20%">adfasdf</td>
+                                <td width="50%">adfasdf</td>
+                                <td width="30%">adfasdf</td>
+                            </tr>
+                            <tr>
+                                <td width="20%">adfasdf</td>
+                                <td width="50%">adfasdf</td>
+                                <td width="30%">adfasdf</td>
+                            </tr>
+                            <tr>
+                                <td width="20%">adfasdf</td>
+                                <td width="50%">adfasdf</td>
+                                <td width="30%">adfasdf</td>
+                            </tr>
+                            <tr>
+                                <td width="20%">adfasdf</td>
+                                <td width="50%">adfasdf</td>
+                                <td width="30%">adfasdf</td>
+                            </tr>
+                            <tr>
+                                <td width="20%">adfasdf</td>
+                                <td width="50%">adfasdf</td>
+                                <td width="30%">adfasdf</td>
+                            </tr>
+                            <tr>
+                                <td width="20%">adfasdf</td>
+                                <td width="50%">adfasdf</td>
+                                <td width="30%">adfasdf</td>
+                            </tr>
+                            <tr>
+                                <td width="20%">adfasdf</td>
+                                <td width="50%">adfasdf</td>
+                                <td width="30%">adfasdf</td>
+                            </tr>
+                            <tr>
+                                <td width="20%">adfasdf</td>
+                                <td width="50%">adfasdf</td>
+                                <td width="30%">adfasdf</td>
+                            </tr>
+                            <tr>
+                                <td width="20%">adfasdf</td>
+                                <td width="50%">adfasdf</td>
+                                <td width="30%">adfasdf</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
             <div class="detail dt-collapsed">
                 <div class="toolbar">
