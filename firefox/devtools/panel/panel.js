@@ -15,22 +15,18 @@
         context.hinting ? $('#hint').addClass('tc-checked') : $('#hint').removeClass('tc-checked');
     }
 
+    // 刷新sidebar tree
     function refreshTarget(target) {
-        let refresh = (ul, text, html, hitarea) => {
-            let e = $(html);
-
-            if (hitarea) {
-                let ha = $('<span class="hitarea"></span>');
-
-                ha.click(function () {
-                    e.hasClass('li-opened') ? e.removeClass('li-opened') : e.addClass('li-opened');
-                });
-
-                e.prepend(ha);
-            }
-            console.log(e.html());
+        let insertHitarea = (e) => {
+            let ha = $('<span class="hitarea"></span>');
             
-            // 目录树元素初始化
+            e.prepend(ha);
+
+            ha.click(() => {
+                e.hasClass('li-opened') ? e.removeClass('li-opened') : e.addClass('li-opened');
+            });
+        
+            // sidebar tree元素初始化
             e.find('> a').click(function () {
                 let a = $(this);
         
@@ -42,12 +38,24 @@
                 a.parent().hasClass('li-opened') ? a.parent().removeClass('li-opened') : a.parent().addClass('li-opened');
                 // console.log($(e).text());
             });
+        };
+
+        let refresh = (ul, text, html, hitarea) => {
+            let e = $(html);
+
+            // 插入hitarea
+            if (hitarea) {
+                insertHitarea(e);
+            }
 
             // 确认插入位置
             for (let li of ul.find('> li')) {
                 let t = $(li).find('> a').text().trim();
                 
                 if (t === text) {
+                    if (hitarea) {
+                        insertHitarea($(li));
+                    }
                     return $(li);
                 } else if (t > text) {
                     $(li).before(e);
@@ -78,7 +86,7 @@
                     html = `<li><a><i class="fa fa-folder-o"></i>${key}</a>`;
                     
                     // 遍历
-                    parse(val.children, refresh(ul, key, html, true));
+                    parse(val.children, refresh(ul, key, html, false));
                     break;
                 case 'file': // 文件
                     html = `<li><a><i class="fa fa-file-${getIcon(val.filetype)}-o"></i>${key}</a></li>`;
@@ -139,6 +147,18 @@
             action: 'context_change',
             data: context
         });
+    });
+
+    $('#open-all').click(function () {
+        if ($(this).hasClass('tc-checked')) {
+            $(this).removeClass('tc-checked');
+            $('.sidebar-tree > li').removeClass('li-opened');
+            $('.sidebar-tree > li > ul > li').removeClass('li-opened');
+        } else {
+            $(this).addClass('tc-checked');
+            $('.sidebar-tree > li').addClass('li-opened');
+            $('.sidebar-tree > li > ul > li').addClass('li-opened');
+        }
     });
 
     // 选中列表项
