@@ -1,3 +1,3 @@
 # anemonefish-extension
 
-Anemonefish（小丑鱼），代理服务器（浏览器插件）
+Anemonefish（小丑鱼），网络代理服务器（浏览器扩展）
