@@ -7,7 +7,7 @@ const banner = `
 \/  _  \\ | | |  __\/ | | | | | (_) | | | |  __\/  _| \\__ \\ | | |
 \\_\/ \\_\/_| |_|\\_github.com/CarefreeTech/anemonefish-extension/
 
-Anemonefish（小丑鱼），网络分析服务器（浏览器插件）
+Anemonefish（小丑鱼），网络分析服务器（浏览器扩展）
 
 `;
 
