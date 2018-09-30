@@ -2,7 +2,7 @@
     "manifest_version": 2,
     "name": "AnemoneFish",
     "version": "0.1",
-    "description": "Anemonefish（小丑鱼），代理服务器（浏览器插件）",
+    "description": "Anemonefish（小丑鱼），网络分析服务器（浏览器插件）",
     "author": "anemonefish@carefree.site",
     "homepage_url": "https://github.com/CarefreeTech/anemonefish-extension/",
     "icons": {
